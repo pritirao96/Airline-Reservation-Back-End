@@ -1,7 +1,7 @@
 package com.lti.airlines.dao;
-import com.lti.airlines.AdminLogin;
-import com.lti.airlines.Flight;
 import com.lti.airlines.dao.*;
+import com.lti.airlines.entity.AdminLogin;
+import com.lti.airlines.entity.Flight;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

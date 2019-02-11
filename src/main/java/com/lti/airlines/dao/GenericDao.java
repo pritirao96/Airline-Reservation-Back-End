@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lti.airlines.Flight;
+import com.lti.airlines.entity.Flight;
 
 @Repository
 public class GenericDao {

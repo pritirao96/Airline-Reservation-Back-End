@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lti.airlines.*;
 import com.lti.airlines.dao.AdminDao;
 import com.lti.airlines.dao.GenericDao;
+import com.lti.airlines.entity.AdminLogin;
+import com.lti.airlines.entity.Flight;
 
 @Service
 public class AdminService {

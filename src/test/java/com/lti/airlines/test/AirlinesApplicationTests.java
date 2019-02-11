@@ -15,9 +15,9 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lti.airlines.AdminLogin;
-import com.lti.airlines.Flight;
 import com.lti.airlines.dao.AdminDao;
+import com.lti.airlines.entity.AdminLogin;
+import com.lti.airlines.entity.Flight;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -33,7 +33,7 @@ public class AirlinesApplicationTests {
 	public void addAdmin() {
 		AdminLogin adminLogin = new AdminLogin();
 		adminLogin.setEmailId("prachi@lti.com");
-		adminLogin.setPassword("lti");
+		adminLogin.setPassword("prachi");
 		adminDao.add(adminLogin);
 
 	}
