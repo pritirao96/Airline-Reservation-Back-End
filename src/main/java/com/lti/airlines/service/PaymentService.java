@@ -3,18 +3,17 @@ package com.lti.airlines.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.lti.airlines.dao.PaymentDao;
+import com.lti.airlines.dao.GenericDao;
 import com.lti.airlines.entity.Payment;
-import com.lti.airlines.entity.UserRegistration;
 
 @Service
 public class PaymentService {
 	
 	@Autowired
-	private PaymentDao paymentDao;
+	private GenericDao genericDao;
 	
 	public void add(Payment payment) {
-		paymentDao.add(payment);
+		genericDao.store(payment);
 	}
 
 }

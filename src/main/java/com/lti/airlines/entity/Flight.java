@@ -1,22 +1,40 @@
 package com.lti.airlines.entity;
 
-import java.sql.Date;
-import java.sql.Time;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table
 public class Flight {
+	
 	@Id
 	private int flightNumber;
 	private String source;
 	private String destination;
 	private String arrivalTime;
 	private String duration;
+	
+	@OneToOne(fetch = FetchType.LAZY, 
+							mappedBy = "flight", 
+							cascade = CascadeType.ALL)
+	private FlightPrice flightPrice;
+	
+	public Flight() {
 
+	}
+	
+	
+	public FlightPrice getFlightPrice() {
+		return flightPrice;
+	}
+	
+	public void setFlightPrice(FlightPrice flightPrice) {
+		this.flightPrice = flightPrice;
+	}
 	public Flight(int flightNumber, String source, String destination,String arrivalTime, String duration) {
 
 		this.flightNumber = flightNumber;
@@ -25,11 +43,7 @@ public class Flight {
 		this.arrivalTime = arrivalTime;
 		this.duration=duration;
 	}
-
-	public Flight() {
-
-	}
-
+	
 	public int getFlightNumber() {
 		return flightNumber;
 	}
@@ -69,6 +83,10 @@ public class Flight {
 	public void setDuration(String duration) {
 		this.duration = duration;
 	}
+
+	
+
+	
 
 
 

@@ -1,9 +1,4 @@
 package com.lti.airlines.test;
-import com.lti.airlines.*;
-
-import static org.junit.Assert.assertEquals;
-
-import java.sql.Time;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,9 +10,10 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lti.airlines.dao.AdminDao;
+import com.lti.airlines.dao.GenericDao;
 import com.lti.airlines.entity.AdminLogin;
 import com.lti.airlines.entity.Flight;
+import com.lti.airlines.entity.FlightPrice;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -26,38 +22,36 @@ import com.lti.airlines.entity.Flight;
 public class AirlinesApplicationTests {
 
 	@Autowired
-	private AdminDao adminDao;
+	private GenericDao genericDao;
 
 	@Test
 	@Transactional
-	public void addAdmin() {
-		AdminLogin adminLogin = new AdminLogin();
-		adminLogin.setEmailId("prachi@lti.com");
-		adminLogin.setPassword("prachi");
-		adminDao.add(adminLogin);
-
-	}
-
-	@Test
-	@Transactional
-	public void addFlight() {
+	public void add() {
+		
 		Flight flight = new Flight();
-	flight.setFlightNumber(101);
-		flight.setSource("Pune");
-		flight.setDestination("Banglore");
-	flight.setArrivalTime("8:35:90" );
-	flight.setDuration("12:30:00");
-		adminDao.addFlight(flight);
+		flight.setFlightNumber(102);
+		flight.setSource("Chennai");
+		flight.setDestination("Banaglore");
+		flight.setArrivalTime("13:35:90");
+		flight.setDuration("10:30:00");
+		
+		FlightPrice flightPrice = new FlightPrice();
+		flightPrice.setNoOfSeats(50);
+		flightPrice.setPricePerSeat(4000);
+		
+		flightPrice.setFlight(flight);
+		flight.setFlightPrice(flightPrice);
+
+		genericDao.store(flight);
 	}
 
 	@Test
-@Transactional
+	@Transactional
 	public void deleteFlight() {
 		Flight flight = new Flight();
 		flight.setFlightNumber(101);
-		
-		adminDao.deleteFlight(flight.getFlightNumber());
-		
+
+		//flight.deleteFlight(flight.getFlightNumber());
 
 	}
 

@@ -15,26 +15,29 @@ import com.lti.airlines.entity.Flight;
 public class GenericDao {
 	@PersistenceContext
 	protected EntityManager entityManager;
-	
+
 	@Transactional
-	public <E> E fetchById(Class<E> classname, int pk) {
-		E e=entityManager.find(classname, pk);
+	public void store(Object obj) {
+		entityManager.merge(obj);
+	}
+
+	@Transactional
+	public <E> E fetchById(Class<E> classname, Object pk) {
+		E e = entityManager.find(classname, pk);
 		return e;
 	}
-	
+
 	@Transactional
-	public <E> List<E> fetchAll(Class<E> e){
-		Query q= entityManager.createQuery("select obj from "+e.getName()+"as obj");
-		return q.getResultList();
-	}
-	
-	@Transactional
-	public List<Flight> fetchAll(){
-		Query q= entityManager.createQuery("select obj from Flight as obj");
-		return q.getResultList();
+	public <E> void delete(Class<E> classname, Object pk) {
+		Object obj = entityManager.find(classname, pk);
+		entityManager.remove(obj);
 	}
 	
 	
-	
-	
+	@Transactional
+	public <E> List<E> fetchAll(Class<E> e) {
+		Query q = entityManager.createQuery("select obj from " + e.getName() + "as obj");
+		return q.getResultList();
+	}
+
 }

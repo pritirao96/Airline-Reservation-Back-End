@@ -10,25 +10,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lti.airlines.entity.FlightPrice;
 import com.lti.airlines.entity.UserRegistration;
+import com.lti.airlines.service.FlightPriceService;
 import com.lti.airlines.service.UserRegistrationService;
 
 @RestController
-public class UserRegistrationController {
-
+public class FlightPriceController {
+	
 	@Autowired
-	UserRegistrationService userRegistrationService;
-
-	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
+	FlightPriceService flightPriceService;
+	
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@CrossOrigin
-	public String addUser(@ Valid @RequestBody UserRegistration userRegistration) {
-		System.out.println(userRegistration.getfName());
-		userRegistrationService.add(userRegistration);
-		return "You have registered successfully";
+	public String add(@RequestBody FlightPrice flightPrice) {
+		System.out.println("the servie class will be called now");
+		flightPriceService.add(flightPrice);
+		return "flight price entered";
 	}
 
-	@RequestMapping(value = "/userRegistration{id}", method = RequestMethod.GET)
-	public UserRegistration fetchById(@PathVariable("id") int id) {
-		return userRegistrationService.fetchById(id);
+	@RequestMapping(value = "/flightPrice{flightPriceId}", method = RequestMethod.GET)
+	public FlightPrice fetchById(@PathVariable("flightPriceId") int flightPriceId) {
+		return flightPriceService.fetchById(flightPriceId);
 	}
+
 }
