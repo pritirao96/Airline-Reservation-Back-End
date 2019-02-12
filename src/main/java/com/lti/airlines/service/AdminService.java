@@ -27,11 +27,11 @@ public class AdminService {
 		genericDao.delete(Flight.class, flightNumber);
 
 	}
-
-	@Transactional
-	public void add(AdminLogin adminLogin) {
-		System.out.println("In daoadminlogin");
-		genericDao.store(adminLogin);
-	}
+//
+//	@Transactional
+//	public void add(AdminLogin adminLogin) {
+//		System.out.println("In daoadminlogin");
+//		genericDao.store(adminLogin);
+//	}
 
 }

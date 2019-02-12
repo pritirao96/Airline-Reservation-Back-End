@@ -16,34 +16,14 @@ public class Flight {
 	private String source;
 	private String destination;
 	private String arrivalTime;
+	private String departureTime;
 	private String duration;
 	
 	@OneToOne(fetch = FetchType.LAZY, 
 							mappedBy = "flight", 
 							cascade = CascadeType.ALL)
 	private FlightPrice flightPrice;
-	
-	public Flight() {
 
-	}
-	
-	
-	public FlightPrice getFlightPrice() {
-		return flightPrice;
-	}
-	
-	public void setFlightPrice(FlightPrice flightPrice) {
-		this.flightPrice = flightPrice;
-	}
-	public Flight(int flightNumber, String source, String destination,String arrivalTime, String duration) {
-
-		this.flightNumber = flightNumber;
-		this.source = source;
-		this.destination = destination;
-		this.arrivalTime = arrivalTime;
-		this.duration=duration;
-	}
-	
 	public int getFlightNumber() {
 		return flightNumber;
 	}
@@ -76,6 +56,14 @@ public class Flight {
 		this.arrivalTime = arrivalTime;
 	}
 
+	public String getDepartureTime() {
+		return departureTime;
+	}
+
+	public void setDepartureTime(String departureTime) {
+		this.departureTime = departureTime;
+	}
+
 	public String getDuration() {
 		return duration;
 	}
@@ -84,10 +72,28 @@ public class Flight {
 		this.duration = duration;
 	}
 
+	public FlightPrice getFlightPrice() {
+		return flightPrice;
+	}
+
+	public void setFlightPrice(FlightPrice flightPrice) {
+		this.flightPrice = flightPrice;
+	}
+
+	public Flight(int flightNumber, String source, String destination, String arrivalTime, String departureTime,
+			String duration, FlightPrice flightPrice) {
+		super();
+		this.flightNumber = flightNumber;
+		this.source = source;
+		this.destination = destination;
+		this.arrivalTime = arrivalTime;
+		this.departureTime = departureTime;
+		this.duration = duration;
+		this.flightPrice = flightPrice;
+	}
+
+	public Flight() {
+		super();
+	}
 	
-
-	
-
-
-
 }
