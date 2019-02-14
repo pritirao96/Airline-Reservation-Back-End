@@ -1,5 +1,6 @@
 package com.lti.airlines.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,18 +13,26 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lti.airlines.entity.Flight;
 
 @Repository
-public class SearchDao extends GenericDao{
+public class SearchDao extends GenericDao {
 
 	@PersistenceContext
 	protected EntityManager entityManager;
-	
+
 	@Transactional
-	public List<Flight> searchFlight(String src, String dst){
-		System.out.println("In admin doa search");
-		Query sql= entityManager.createQuery("select ft from Flight as ft where ft.source=?1 and ft.destination=?2");
-		sql.setParameter(1, src);
-		sql.setParameter(2, dst);
-		
+	public List<Flight> searchFlight(String src, String dst, Date date) {
+//		Query sql = entityManager
+//				.createQuery("from Flight ft where ft.source= ?1 and ft.destination= ?2 and ft.flightdate=?3 ");
+		Query sql = entityManager
+				.createQuery("from Flight ft where ft.source=:source and ft.destination=:destination and ft.flightdate=:fdate ");
+		sql.setParameter("source", src);
+		sql.setParameter("destination", dst);
+		sql.setParameter("fdate", date);
+		return sql.getResultList();
+	}
+
+	@Transactional
+	public List<Flight> listFlight() {
+		Query sql = entityManager.createQuery("from Flight ft");
 		return sql.getResultList();
 	}
 }

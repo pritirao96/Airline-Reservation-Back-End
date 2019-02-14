@@ -14,14 +14,14 @@ import com.lti.airlines.entity.UserRegistration;
 import com.lti.airlines.service.UserRegistrationService;
 
 @RestController
+@CrossOrigin
 public class UserRegistrationController {
 
 	@Autowired
 	UserRegistrationService userRegistrationService;
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	@CrossOrigin
-	public String addUser(@ Valid @RequestBody UserRegistration userRegistration) {
+	public String addUser(@Valid @RequestBody UserRegistration userRegistration) {
 		System.out.println(userRegistration.getfName());
 		userRegistrationService.add(userRegistration);
 		return "You have registered successfully";

@@ -1,27 +1,39 @@
 package com.lti.airlines.entity;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
-@Table
 public class Flight {
-	
+
 	@Id
 	private int flightNumber;
 	private String source;
 	private String destination;
-	private String arrivalTime;
-	private String departureTime;
-	private String duration;
-	
-	@OneToOne(fetch = FetchType.LAZY, 
-							mappedBy = "flight", 
-							cascade = CascadeType.ALL)
+	@Temporal(TemporalType.DATE)
+	private Date arrivalTime;
+	@Temporal(TemporalType.DATE)
+	private Date departureTime;
+	@Temporal(TemporalType.DATE)
+	private Date duration;
+
+	@Temporal(TemporalType.DATE)
+	//@Column(name = "flightdate")
+	private Date flightdate;
+	// private Calendar date;
+
+	@OneToOne(fetch = FetchType.EAGER, mappedBy = "flight", cascade = CascadeType.ALL)
 	private FlightPrice flightPrice;
 
 	public int getFlightNumber() {
@@ -48,27 +60,27 @@ public class Flight {
 		this.destination = destination;
 	}
 
-	public String getArrivalTime() {
+	public Date getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(String arrivalTime) {
+	public void setArrivalTime(Date arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
-	public String getDepartureTime() {
+	public Date getDepartureTime() {
 		return departureTime;
 	}
 
-	public void setDepartureTime(String departureTime) {
+	public void setDepartureTime(Date departureTime) {
 		this.departureTime = departureTime;
 	}
 
-	public String getDuration() {
+	public Date getDuration() {
 		return duration;
 	}
 
-	public void setDuration(String duration) {
+	public void setDuration(Date duration) {
 		this.duration = duration;
 	}
 
@@ -80,20 +92,12 @@ public class Flight {
 		this.flightPrice = flightPrice;
 	}
 
-	public Flight(int flightNumber, String source, String destination, String arrivalTime, String departureTime,
-			String duration, FlightPrice flightPrice) {
-		super();
-		this.flightNumber = flightNumber;
-		this.source = source;
-		this.destination = destination;
-		this.arrivalTime = arrivalTime;
-		this.departureTime = departureTime;
-		this.duration = duration;
-		this.flightPrice = flightPrice;
+	public Date getFlightDate() {
+		return flightdate;
 	}
 
-	public Flight() {
-		super();
+	public void setFlightDate(Date flightDate) {
+		this.flightdate = flightDate;
 	}
-	
+
 }

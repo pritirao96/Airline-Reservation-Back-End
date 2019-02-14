@@ -29,9 +29,9 @@ public class FlightPriceController {
 		return "flight price entered";
 	}
 
-	@RequestMapping(value = "/flightPrice{flightPriceId}", method = RequestMethod.GET)
-	public FlightPrice fetchById(@PathVariable("flightPriceId") int flightPriceId) {
-		return flightPriceService.fetchById(flightPriceId);
-	}
+//	@RequestMapping(value = "/flightPrice/{flightPriceId}", method = RequestMethod.GET)
+//	public FlightPrice fetchById(@PathVariable("flightPriceId") int flightPriceId) {
+//		return flightPriceService.fetchById(flightPriceId);
+//	}
 
 }

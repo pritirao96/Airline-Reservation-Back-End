@@ -1,5 +1,11 @@
 package com.lti.airlines.test;
 
+import static org.junit.Assert.assertEquals;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.junit.Test;
@@ -12,6 +18,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.lti.airlines.dao.GenericDao;
+import com.lti.airlines.dao.SearchDao;
 import com.lti.airlines.entity.Flight;
 import com.lti.airlines.entity.FlightPrice;
 import com.lti.airlines.entity.UserRegistration;
@@ -19,63 +26,73 @@ import com.lti.airlines.entity.UserRegistration;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Rollback(false)
-@AutoConfigureTestDatabase(replace=Replace.NONE)
+@AutoConfigureTestDatabase(replace = Replace.NONE)
 public class AirlinesReservationApplicationTests {
 
 	@Autowired
 	private GenericDao genericDao;
-	
-	private Flight flight;
-	
+
+	@Autowired
+	private SearchDao searchDao;
+
 	@Test
 	@Transactional
 	public void addUser() {
-		UserRegistration userRegistration =new UserRegistration();
-		userRegistration.setfName("shreya");
-		userRegistration.setlName("A");
-		userRegistration.setEmail("shreya@gmail.com");
-		userRegistration.setDob("15/5/14");
-		userRegistration.setPassword("shreya@123");
-		userRegistration.setPhoneNo(85475);
+		UserRegistration userRegistration = new UserRegistration();
+		userRegistration.setfName("amar");
+		userRegistration.setlName("panchal");
+		userRegistration.setEmail("amar@gmail.com");
+		userRegistration.setDob("16/05/1996");
+		userRegistration.setPassword("amar@123");
+		userRegistration.setPhoneNo(996630213);
 		genericDao.store(userRegistration);
+		//assertNotNull(userRegistration);
 	}
 
 	@Test
 	@Transactional
 	public void fetchById() {
-		UserRegistration userRegistration= genericDao.fetchById(UserRegistration.class,101);
+		UserRegistration userRegistration = genericDao.fetchById(UserRegistration.class, 101);
 		System.out.println(userRegistration.getEmail());
-		
+
 	}
-	
+
 	@Test
 	@Transactional
-	public void add() {
-		
+	public void add() throws ParseException {
+
 		Flight flight = new Flight();
-		flight.setFlightNumber(102);
+		flight.setFlightNumber(110);
 		flight.setSource("Chennai");
-		flight.setDestination("Banaglore");
-		flight.setArrivalTime("13:35:90");
-		flight.setDuration("10:30:00");
-		
+		flight.setDestination("Banglore");
+		flight.setArrivalTime(new SimpleDateFormat("hh:mm:ss").parse("10:30:00"));
+		flight.setDepartureTime(new SimpleDateFormat("hh:mm:ss").parse("11:30:00"));
+		flight.setDuration(new SimpleDateFormat("hh:mm:ss").parse("1:30:00"));
+		flight.setFlightDate(new SimpleDateFormat("dd-MM-yyyy").parse("15-02-2019"));
+
 		FlightPrice flightPrice = new FlightPrice();
 		flightPrice.setNoOfSeats(50);
-		flightPrice.setPricePerSeat(4000);
-		
+		flightPrice.setPricePerSeat(7560);
+
 		flightPrice.setFlight(flight);
 		flight.setFlightPrice(flightPrice);
 
 		genericDao.store(flight);
+		//assertNotNull(flight);
 	}
 
 	@Test
 	@Transactional
 	public void deleteFlight() {
 		Flight flight = new Flight();
-		flight.setFlightNumber(101);
+		flight.setFlightNumber(110);
 	}
-	
-	
-}
 
+	@Test
+	@Transactional
+	public void searchFlight() throws ParseException {
+		List<Flight> a = searchDao.searchFlight("Chennai", "Banglore",
+				new SimpleDateFormat("dd-MM-yyyy").parse("15-02-2019"));
+		assertEquals(3, a.size());
+	}
+}

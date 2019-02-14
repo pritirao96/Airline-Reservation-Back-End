@@ -21,26 +21,16 @@ public class AdminController {
 	
 @RequestMapping(path="/addFlight",method=RequestMethod.POST)
 	public void addFlight(@RequestBody Flight flight) {
-	System.out.println("in controller");
 	adminService.addFlight(flight);
 	}
 	
 	@RequestMapping(path="/flight/{flightNumber}",method=RequestMethod.GET)
-	public String deleteFlight(@PathVariable ("flightNumber") int flightNumber) {
-	
+	public void deleteFlight(@PathVariable ("flightNumber") int flightNumber) {
 		adminService.deleteFlight(flightNumber);
-		return "removed success";
 	}
 	
 //	@RequestMapping(path="/addAdmin",method=RequestMethod.POST)
 //	public void addAdmin(@RequestBody AdminLogin adminLogin) {
-//		adminService.add(adminLogin);
-//
-//		
-//}
-//	
-//	
-//	
-	
+//		adminService.add(adminLogin);	
 
 }

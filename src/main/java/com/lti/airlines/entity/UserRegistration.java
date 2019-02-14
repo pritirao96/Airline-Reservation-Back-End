@@ -13,39 +13,23 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table
 public class UserRegistration {
+	
 	@GeneratedValue
 	@Id
 	private int id;
 
 	@NotNull
 	private String fName;
-	
+
 	@NotNull
 	private String lName;
 
 	@Column(unique = true)
 	private String email;
 
-	
 	private String password;
 	private String dob;
-	private int phoneNo;
-
-	public UserRegistration(int id, String fName, String lName, String email, String password, String dob,
-			int phoneNo) {
-		super();
-		this.id = id;
-		this.fName = fName;
-		this.lName = lName;
-		this.email = email;
-		this.password = password;
-		this.dob = dob;
-		this.phoneNo = phoneNo;
-	}
-
-	public UserRegistration() {
-		super();
-	}
+	private double phoneNo;
 
 	public int getId() {
 		return id;
@@ -95,11 +79,11 @@ public class UserRegistration {
 		this.dob = dob;
 	}
 
-	public int getPhoneNo() {
+	public double getPhoneNo() {
 		return phoneNo;
 	}
 
-	public void setPhoneNo(int phoneNo) {
+	public void setPhoneNo(double phoneNo) {
 		this.phoneNo = phoneNo;
 	}
 

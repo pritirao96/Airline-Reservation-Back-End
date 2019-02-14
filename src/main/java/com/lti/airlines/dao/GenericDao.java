@@ -9,16 +9,18 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.lti.airlines.entity.Flight;
+import com.lti.airlines.entity.AdminLogin;
+import com.lti.airlines.entity.UserRegistration;
 
 @Repository
 public class GenericDao {
+	
 	@PersistenceContext
 	protected EntityManager entityManager;
 
 	@Transactional
 	public void store(Object obj) {
-		entityManager.merge(obj);
+		entityManager.persist(obj);
 	}
 
 	@Transactional
@@ -36,8 +38,23 @@ public class GenericDao {
 	
 	@Transactional
 	public <E> List<E> fetchAll(Class<E> e) {
-		Query q = entityManager.createQuery("select obj from " + e.getName() + "as obj");
+		Query q = entityManager.createQuery("from " + e.getName() + "as obj");
 		return q.getResultList();
 	}
 
+	@Transactional
+	public  List<UserRegistration> fetchUser(String email,String password){
+		Query sql= entityManager.createQuery("from UserRegistration ur where ur.email= ?1 and ur.password= ?2");
+		sql.setParameter(1, email);
+		sql.setParameter(2, password);
+		return sql.getResultList();
+	}
+	
+	@Transactional
+	public  List<AdminLogin> fetchAdmin(String emailId,String password){
+		Query q = entityManager.createQuery("from AdminLogin al where al.emailId= ?1 and al.password= ?2");
+		q.setParameter(1, emailId);
+		q.setParameter(2, password);
+		return q.getResultList();
+	}
 }

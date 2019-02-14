@@ -16,6 +16,14 @@ public class Payment {
 	@Id
 	@GeneratedValue
 	private int id;
+	private String fName;
+	private String lName;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="registration_id")
+	private UserRegistration userRegistration;
+	
+	private double balance;
 	
 	public int getId() {
 		return id;
@@ -56,13 +64,4 @@ public class Payment {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-
-	private String fName;
-	private String lName;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="registration_id")
-	private UserRegistration userRegistration;
-	
-	private double balance;
 }

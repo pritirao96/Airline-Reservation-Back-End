@@ -1,13 +1,14 @@
 package com.lti.airlines.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table
@@ -17,17 +18,16 @@ public class FlightPrice {
 	@GeneratedValue
 	private int flightPriceId;
 
+	@JsonIgnore
 	@OneToOne()
-	@JoinColumn(name="flightNumber")
+	@JoinColumn(name="flightNumber", unique=true)
 	private Flight flight;
 
+	@Column(nullable = false, columnDefinition = "int default 50")
 	private int noOfSeats;
+	
 	private double pricePerSeat;
 	
-	public FlightPrice() {
-		
-	}
-
 	public int getFlightPriceId() {
 		return flightPriceId;
 	}
@@ -52,6 +52,9 @@ public class FlightPrice {
 	public FlightPrice(Flight flight) {
 		super();
 		this.flight = flight;
+	}
+
+	public FlightPrice() {
 	}
 
 	public void setNoOfSeats(int noOfSeats) {

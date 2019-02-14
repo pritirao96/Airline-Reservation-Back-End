@@ -1,5 +1,6 @@
 package com.lti.airlines.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ public class LoginService {
 		String email = userRegistration.getEmail();
 		String password = userRegistration.getPassword();
 		boolean flag = false;
-		List<UserRegistration> userRegistrationList = genericDao.fetchAll(UserRegistration.class);
+//		List<UserRegistration> userRegistrationList = genericDao.fetchAllUser();
+		List<UserRegistration> userRegistrationList = genericDao.fetchUser(email,password);
 
 		for (UserRegistration userRegistration1 : userRegistrationList) {
 			if (email.equals(userRegistration1.getEmail())) {
@@ -34,7 +36,6 @@ public class LoginService {
 					return flag;
 				}
 			}
-			// return flag;
 		}
 		return flag;
 	}
@@ -42,24 +43,27 @@ public class LoginService {
 	public boolean verifyAdmin(AdminLogin adminLogin) {
 		String email = adminLogin.getEmailId();
 		String password = adminLogin.getPassword();
-		boolean flag = false;
-		List<AdminLogin> adminLoginList = genericDao.fetchAll(AdminLogin.class);
+		boolean flag=false;
+		List<AdminLogin> adminLoginList = genericDao.fetchAdmin(email,password);
 
 		for (AdminLogin adminLogin1 : adminLoginList) {
 			if (email.equals(adminLogin1.getEmailId())) {
 				if (password.equals(adminLogin1.getPassword())) {
 					flag = true;
-					return flag;
 				}
 			}
-			// return flag;
 		}
 		return flag;
 	}
 	
 	@Transactional
-	public List<Flight> searchFlight(String src,String dst){
+	public List<Flight> searchFlight(String src,String dst,Date date){
+		return searchDao.searchFlight(src,dst,date);
+	}
+	
+	@Transactional
+	public List<Flight> listFlight(){
 		System.out.println("In dao searchFlight");
-		return searchDao.searchFlight(src,dst);
+		return searchDao.listFlight();
 	}
 }

@@ -13,12 +13,13 @@ import com.lti.airlines.service.PaymentService;
 import com.lti.airlines.service.UserRegistrationService;
 
 @RestController
+@CrossOrigin
 public class PaymentController {
 	
 	@Autowired
 	PaymentService paymentService;
+	
 	@RequestMapping(value = "/addUserPayment", method = RequestMethod.POST)
-	@CrossOrigin
 	public String addUser(@RequestBody Payment payment) {
 		paymentService.add(payment);
 		return "Payment table updated";
