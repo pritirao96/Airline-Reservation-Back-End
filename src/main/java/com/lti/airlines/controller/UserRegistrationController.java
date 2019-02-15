@@ -21,10 +21,10 @@ public class UserRegistrationController {
 	UserRegistrationService userRegistrationService;
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public String addUser(@Valid @RequestBody UserRegistration userRegistration) {
-		System.out.println(userRegistration.getfName());
-		userRegistrationService.add(userRegistration);
-		return "You have registered successfully";
+	public boolean addUser(@Valid @RequestBody UserRegistration userRegistration) {
+		//System.out.println(userRegistration.getfName());
+		boolean flag = userRegistrationService.add(userRegistration);
+		return flag;
 	}
 
 	@RequestMapping(value = "/userRegistration{id}", method = RequestMethod.GET)

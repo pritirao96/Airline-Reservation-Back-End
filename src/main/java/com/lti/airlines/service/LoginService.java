@@ -26,7 +26,6 @@ public class LoginService {
 		String email = userRegistration.getEmail();
 		String password = userRegistration.getPassword();
 		boolean flag = false;
-//		List<UserRegistration> userRegistrationList = genericDao.fetchAllUser();
 		List<UserRegistration> userRegistrationList = genericDao.fetchUser(email,password);
 
 		for (UserRegistration userRegistration1 : userRegistrationList) {

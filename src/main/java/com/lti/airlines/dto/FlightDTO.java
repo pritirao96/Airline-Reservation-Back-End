@@ -1,27 +1,17 @@
-package com.lti.airlines.entity;
+package com.lti.airlines.dto;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
 
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
-public class Flight {
-
+public class FlightDTO {
+	
 	@Id
 	private int flightNumber;
 	private String source;
 	private String destination;
-	//@JsonFormat(locale = "hu", shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	@Temporal(TemporalType.TIME)
 	private Date arrivalTime;
 	@Temporal(TemporalType.TIME)
@@ -31,10 +21,8 @@ public class Flight {
 
 	@Temporal(TemporalType.DATE)
 	private Date flightdate;
-	// private Calendar date;
-
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "flight", cascade = CascadeType.ALL)
-	private FlightPrice flightPrice;
+	
+	private double pricePerSeat;
 
 	public int getFlightNumber() {
 		return flightNumber;
@@ -84,20 +72,20 @@ public class Flight {
 		this.duration = duration;
 	}
 
-	public FlightPrice getFlightPrice() {
-		return flightPrice;
-	}
-
-	public void setFlightPrice(FlightPrice flightPrice) {
-		this.flightPrice = flightPrice;
-	}
-
-	public Date getFlightDate() {
+	public Date getFlightdate() {
 		return flightdate;
 	}
 
-	public void setFlightDate(Date flightDate) {
-		this.flightdate = flightDate;
+	public void setFlightdate(Date flightdate) {
+		this.flightdate = flightdate;
 	}
 
+	public double getPricePerSeat() {
+		return pricePerSeat;
+	}
+
+	public void setPricePerSeat(double pricePerSeat) {
+		this.pricePerSeat = pricePerSeat;
+	}
+	
 }

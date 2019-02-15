@@ -24,31 +24,29 @@ public class LoginController {
 	private LoginService loginService;
 
 	@RequestMapping(path = "/user/verify", method = RequestMethod.POST)
-	public String userLogin(@RequestBody UserRegistration userRegistration) {
+	public boolean userLogin(@RequestBody UserRegistration userRegistration) {
 		boolean flag = loginService.verifyUser(userRegistration);
-		String flag1 = Boolean.toString(flag);
-		if (flag1.equals("true")) {
-			return "Verified";
+		//String flag1 = Boolean.toString(flag);
+		if (flag) {
+			return true;
 		} else {
-			return "Invalid login";
+			return false;
 		}
 	}
 
 	@RequestMapping(path = "/admin/verify", method = RequestMethod.POST)
-	public String adminLogin(@RequestBody AdminLogin adminLogin) {
+	public boolean adminLogin(@RequestBody AdminLogin adminLogin) {
 		boolean flag = loginService.verifyAdmin(adminLogin);
-		String flag1 = Boolean.toString(flag);
-		if (flag1.equals("true")) {
-			return "Verified";
+		if (flag) {
+			return true;
 		} else {
-			return "Invalid login";
+			return false;
 		}
 	}
 
-	@CrossOrigin
 	@RequestMapping(path = "/flight/{source}/{destination}/{date}", method = RequestMethod.GET)
 	public List<Flight> searchFlight(@PathVariable("source") String src, @PathVariable("destination") String dst,
-			@PathVariable("destination") Date date) {
+			@PathVariable("date") Date date) {
 		return loginService.searchFlight(src, dst, date);
 	}
 

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.lti.airlines.dao.GenericDao;
-import com.lti.airlines.entity.AdminLogin;
+import com.lti.airlines.dto.FlightDTO;
 import com.lti.airlines.entity.Flight;
 
 @Service
@@ -15,9 +15,9 @@ public class AdminService {
 	private GenericDao genericDao;
 
 	@Transactional
-	public void addFlight(Flight flight) {
+	public void addFlight(FlightDTO flightDto) {
 		System.out.println("In dao addflight");
-		genericDao.store(flight);
+		genericDao.store(flightDto);
 
 	}
 

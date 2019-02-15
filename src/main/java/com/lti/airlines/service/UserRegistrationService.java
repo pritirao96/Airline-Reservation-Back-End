@@ -12,8 +12,9 @@ public class UserRegistrationService {
 	@Autowired
 	private GenericDao genericDao;
 
-	public void add(UserRegistration userRegistration) {
+	public boolean add(UserRegistration userRegistration) {
 		genericDao.store(userRegistration);
+		return true;
 	}
 
 	public UserRegistration fetchById(int id) {

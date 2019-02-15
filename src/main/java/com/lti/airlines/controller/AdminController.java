@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.lti.airlines.*;
-import com.lti.airlines.dao.GenericDao;
-import com.lti.airlines.entity.Flight;
+import com.lti.airlines.dto.FlightDTO;
 import com.lti.airlines.service.AdminService;
 
 @RestController
@@ -19,9 +17,10 @@ public class AdminController {
 	@Autowired
 	AdminService adminService;
 	
-@RequestMapping(path="/addFlight",method=RequestMethod.POST)
-	public void addFlight(@RequestBody Flight flight) {
-	adminService.addFlight(flight);
+
+	@RequestMapping(path="/addFlight",method=RequestMethod.POST)
+	public void addFlight(@RequestBody FlightDTO flightDto) {
+	adminService.addFlight(flightDto);
 	}
 	
 	@RequestMapping(path="/flight/{flightNumber}",method=RequestMethod.GET)

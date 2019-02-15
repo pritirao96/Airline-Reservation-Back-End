@@ -62,17 +62,17 @@ public class AirlinesReservationApplicationTests {
 	public void add() throws ParseException {
 
 		Flight flight = new Flight();
-		flight.setFlightNumber(110);
-		flight.setSource("Chennai");
-		flight.setDestination("Banglore");
-		flight.setArrivalTime(new SimpleDateFormat("hh:mm:ss").parse("10:30:00"));
-		flight.setDepartureTime(new SimpleDateFormat("hh:mm:ss").parse("11:30:00"));
-		flight.setDuration(new SimpleDateFormat("hh:mm:ss").parse("1:30:00"));
-		flight.setFlightDate(new SimpleDateFormat("dd-MM-yyyy").parse("15-02-2019"));
+		flight.setFlightNumber(120);
+		flight.setSource("Mumbai");
+		flight.setDestination("Kolkata");
+		flight.setArrivalTime(new SimpleDateFormat("hh:mm:ss").parse("11:30:00"));
+		flight.setDepartureTime(new SimpleDateFormat("hh:mm:ss").parse("12:30:00"));
+		flight.setDuration(new SimpleDateFormat("hh:mm:ss").parse("3:30:00"));
+		flight.setFlightDate(new SimpleDateFormat("dd-MM-yyyy").parse("19-02-2019"));
 
 		FlightPrice flightPrice = new FlightPrice();
 		flightPrice.setNoOfSeats(50);
-		flightPrice.setPricePerSeat(7560);
+		flightPrice.setPricePerSeat(5560);
 
 		flightPrice.setFlight(flight);
 		flight.setFlightPrice(flightPrice);
