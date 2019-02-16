@@ -19,9 +19,7 @@ public class SearchDao extends GenericDao {
 	protected EntityManager entityManager;
 
 	@Transactional
-	public List<Flight> searchFlight(String src, String dst, Date date) {
-//		Query sql = entityManager
-//				.createQuery("from Flight ft where ft.source= ?1 and ft.destination= ?2 and ft.flightdate=?3 ");
+	public List<Flight> searchFlight(String src, String dst, String date) {
 		Query sql = entityManager
 				.createQuery("from Flight ft where ft.source=:source and ft.destination=:destination and ft.flightdate=:fdate ");
 		sql.setParameter("source", src);

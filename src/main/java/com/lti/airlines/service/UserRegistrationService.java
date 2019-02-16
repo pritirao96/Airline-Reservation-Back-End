@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.lti.airlines.dao.GenericDao;
 import com.lti.airlines.entity.UserRegistration;
+import com.lti.airlines.objectEnum.Status;
 
 @Service
 public class UserRegistrationService {
@@ -12,9 +13,9 @@ public class UserRegistrationService {
 	@Autowired
 	private GenericDao genericDao;
 
-	public boolean add(UserRegistration userRegistration) {
+	public Object add(UserRegistration userRegistration) {
 		genericDao.store(userRegistration);
-		return true;
+		return Status.TRUE;
 	}
 
 	public UserRegistration fetchById(int id) {

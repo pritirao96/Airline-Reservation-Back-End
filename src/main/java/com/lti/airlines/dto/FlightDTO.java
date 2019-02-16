@@ -8,19 +8,13 @@ import javax.persistence.TemporalType;
 
 public class FlightDTO {
 	
-	@Id
 	private int flightNumber;
 	private String source;
 	private String destination;
-	@Temporal(TemporalType.TIME)
-	private Date arrivalTime;
-	@Temporal(TemporalType.TIME)
-	private Date departureTime;
-	@Temporal(TemporalType.TIME)
-	private Date duration;
-
-	@Temporal(TemporalType.DATE)
-	private Date flightdate;
+	private String arrivalTime;
+	private String departureTime;
+	private String duration;
+	private String flightdate;
 	
 	private double pricePerSeat;
 
@@ -48,35 +42,35 @@ public class FlightDTO {
 		this.destination = destination;
 	}
 
-	public Date getArrivalTime() {
+	public String getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(Date arrivalTime) {
+	public void setArrivalTime(String arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
-	public Date getDepartureTime() {
+	public String getDepartureTime() {
 		return departureTime;
 	}
 
-	public void setDepartureTime(Date departureTime) {
+	public void setDepartureTime(String departureTime) {
 		this.departureTime = departureTime;
 	}
 
-	public Date getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Date duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 
-	public Date getFlightdate() {
+	public String getFlightdate() {
 		return flightdate;
 	}
 
-	public void setFlightdate(Date flightdate) {
+	public void setFlightdate(String flightdate) {
 		this.flightdate = flightdate;
 	}
 
@@ -87,5 +81,13 @@ public class FlightDTO {
 	public void setPricePerSeat(double pricePerSeat) {
 		this.pricePerSeat = pricePerSeat;
 	}
+
+	@Override
+	public String toString() {
+		return "FlightDTO [flightNumber=" + flightNumber + ", source=" + source + ", destination=" + destination
+				+ ", arrivalTime=" + arrivalTime + ", departureTime=" + departureTime + ", duration=" + duration
+				+ ", flightdate=" + flightdate + ", pricePerSeat=" + pricePerSeat + "]";
+	}
+	
 	
 }

@@ -1,10 +1,13 @@
 package com.lti.airlines.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,6 +30,9 @@ public class FlightPrice {
 	private int noOfSeats;
 	
 	private double pricePerSeat;
+	
+	@OneToMany(mappedBy="flight")
+	private Set<BookSeats> bookSeat;
 	
 	public int getFlightPriceId() {
 		return flightPriceId;
@@ -67,6 +73,14 @@ public class FlightPrice {
 
 	public void setPricePerSeat(double pricePerSeat) {
 		this.pricePerSeat = pricePerSeat;
+	}
+
+	public Set<BookSeats> getBookSeat() {
+		return bookSeat;
+	}
+
+	public void setBookSeat(Set<BookSeats> bookSeat) {
+		this.bookSeat = bookSeat;
 	}
 
 	

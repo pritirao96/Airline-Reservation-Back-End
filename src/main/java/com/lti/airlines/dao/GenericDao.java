@@ -35,6 +35,11 @@ public class GenericDao {
 		entityManager.remove(obj);
 	}
 	
+	@Transactional
+	public <E> void delete(Object pk) {
+		//Object obj = entityManager.find(pk);
+		entityManager.remove(pk);
+	}
 	
 	@Transactional
 	public <E> List<E> fetchAll(Class<E> e) {

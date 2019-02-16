@@ -1,6 +1,8 @@
 package com.lti.airlines.service;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,20 +24,14 @@ public class LoginService {
 	@Autowired
 	private SearchDao searchDao;
 
-	public boolean verifyUser(UserRegistration userRegistration) {
+	public String verifyUser(UserRegistration userRegistration) {
 		String email = userRegistration.getEmail();
 		String password = userRegistration.getPassword();
-		boolean flag = false;
+		String flag = "false";
 		List<UserRegistration> userRegistrationList = genericDao.fetchUser(email,password);
 
-		for (UserRegistration userRegistration1 : userRegistrationList) {
-			if (email.equals(userRegistration1.getEmail())) {
-				if (password.equals(userRegistration1.getPassword())) {
-					flag = true;
-					return flag;
-				}
-			}
-		}
+		if(userRegistrationList.size()!=0)
+					flag = "true";
 		return flag;
 	}
 	
@@ -56,7 +52,7 @@ public class LoginService {
 	}
 	
 	@Transactional
-	public List<Flight> searchFlight(String src,String dst,Date date){
+	public List<Flight> searchFlight(String src,String dst,String date) throws ParseException{
 		return searchDao.searchFlight(src,dst,date);
 	}
 	

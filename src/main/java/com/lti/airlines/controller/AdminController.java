@@ -1,4 +1,5 @@
 package com.lti.airlines.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ public class AdminController {
 
 	@RequestMapping(path="/addFlight",method=RequestMethod.POST)
 	public void addFlight(@RequestBody FlightDTO flightDto) {
+		System.out.println(flightDto);
 	adminService.addFlight(flightDto);
 	}
 	
@@ -27,9 +29,4 @@ public class AdminController {
 	public void deleteFlight(@PathVariable ("flightNumber") int flightNumber) {
 		adminService.deleteFlight(flightNumber);
 	}
-	
-//	@RequestMapping(path="/addAdmin",method=RequestMethod.POST)
-//	public void addAdmin(@RequestBody AdminLogin adminLogin) {
-//		adminService.add(adminLogin);	
-
 }

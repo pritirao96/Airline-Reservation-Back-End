@@ -21,10 +21,10 @@ public class UserRegistrationController {
 	UserRegistrationService userRegistrationService;
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public boolean addUser(@Valid @RequestBody UserRegistration userRegistration) {
+	public Object addUser(@Valid @RequestBody UserRegistration userRegistration) {
 		//System.out.println(userRegistration.getfName());
-		boolean flag = userRegistrationService.add(userRegistration);
-		return flag;
+		Object obj= userRegistrationService.add(userRegistration);
+		return obj;
 	}
 
 	@RequestMapping(value = "/userRegistration{id}", method = RequestMethod.GET)

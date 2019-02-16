@@ -62,13 +62,13 @@ public class AirlinesReservationApplicationTests {
 	public void add() throws ParseException {
 
 		Flight flight = new Flight();
-		flight.setFlightNumber(120);
+		flight.setFlightNumber(127);
 		flight.setSource("Mumbai");
-		flight.setDestination("Kolkata");
-		flight.setArrivalTime(new SimpleDateFormat("hh:mm:ss").parse("11:30:00"));
-		flight.setDepartureTime(new SimpleDateFormat("hh:mm:ss").parse("12:30:00"));
-		flight.setDuration(new SimpleDateFormat("hh:mm:ss").parse("3:30:00"));
-		flight.setFlightDate(new SimpleDateFormat("dd-MM-yyyy").parse("19-02-2019"));
+		flight.setDestination("Chennai");
+		flight.setArrivalTime("5:30:00");
+		flight.setDepartureTime("2:30:00");
+		flight.setDuration("2:30:00");
+		flight.setFlightDate("2019-02-19");
 
 		FlightPrice flightPrice = new FlightPrice();
 		flightPrice.setNoOfSeats(50);
@@ -85,14 +85,15 @@ public class AirlinesReservationApplicationTests {
 	@Transactional
 	public void deleteFlight() {
 		Flight flight = new Flight();
-		flight.setFlightNumber(110);
+		flight.setFlightNumber(120);
+		genericDao.delete(flight.getFlightNumber());
+		//genericDao.delete(Flight.class, 120);
 	}
 
 	@Test
 	@Transactional
-	public void searchFlight() throws ParseException {
-		List<Flight> a = searchDao.searchFlight("Chennai", "Banglore",
-				new SimpleDateFormat("dd-MM-yyyy").parse("15-02-2019"));
-		assertEquals(3, a.size());
+	public void searchFlight() {
+		List<Flight> a = searchDao.searchFlight("Chennai", "Banglore","2019-02-19");
+		assertEquals(1, a.size());
 	}
 }

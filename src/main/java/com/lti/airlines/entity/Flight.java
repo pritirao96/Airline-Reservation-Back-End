@@ -1,16 +1,14 @@
 package com.lti.airlines.entity;
 
-import java.util.Calendar;
 import java.util.Date;
+import java.util.Set;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,20 +19,16 @@ public class Flight {
 	private int flightNumber;
 	private String source;
 	private String destination;
-	//@JsonFormat(locale = "hu", shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	@Temporal(TemporalType.TIME)
-	private Date arrivalTime;
-	@Temporal(TemporalType.TIME)
-	private Date departureTime;
-	@Temporal(TemporalType.TIME)
-	private Date duration;
-
-	@Temporal(TemporalType.DATE)
-	private Date flightdate;
-	// private Calendar date;
+	private String arrivalTime;
+	private String departureTime;
+	private String duration;
+	private String flightdate;
 
 	@OneToOne(fetch = FetchType.EAGER, mappedBy = "flight", cascade = CascadeType.ALL)
 	private FlightPrice flightPrice;
+	
+	@OneToMany(mappedBy="flight", cascade = CascadeType.ALL)
+	private Set<BookSeats> bookSeat;
 
 	public int getFlightNumber() {
 		return flightNumber;
@@ -60,27 +54,27 @@ public class Flight {
 		this.destination = destination;
 	}
 
-	public Date getArrivalTime() {
+	public String getArrivalTime() {
 		return arrivalTime;
 	}
 
-	public void setArrivalTime(Date arrivalTime) {
+	public void setArrivalTime(String arrivalTime) {
 		this.arrivalTime = arrivalTime;
 	}
 
-	public Date getDepartureTime() {
+	public String getDepartureTime() {
 		return departureTime;
 	}
 
-	public void setDepartureTime(Date departureTime) {
+	public void setDepartureTime(String departureTime) {
 		this.departureTime = departureTime;
 	}
 
-	public Date getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Date duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
 
@@ -92,11 +86,11 @@ public class Flight {
 		this.flightPrice = flightPrice;
 	}
 
-	public Date getFlightDate() {
+	public String getFlightDate() {
 		return flightdate;
 	}
 
-	public void setFlightDate(Date flightDate) {
+	public void setFlightDate(String flightDate) {
 		this.flightdate = flightDate;
 	}
 

@@ -1,13 +1,13 @@
 package com.lti.airlines.entity;
 
-import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -30,7 +30,13 @@ public class UserRegistration {
 	private String password;
 	private String dob;
 	private double phoneNo;
+	
+	@OneToMany(mappedBy="userRegistration")
+	private Set<BookSeats> bookseats;
 
+	@OneToMany(mappedBy="userReg")
+	private Set<PassengerDetails> passdetails;
+	
 	public int getId() {
 		return id;
 	}
@@ -85,6 +91,22 @@ public class UserRegistration {
 
 	public void setPhoneNo(double phoneNo) {
 		this.phoneNo = phoneNo;
+	}
+
+	public Set<BookSeats> getBookseats() {
+		return bookseats;
+	}
+
+	public void setBookseats(Set<BookSeats> bookseats) {
+		this.bookseats = bookseats;
+	}
+
+	public Set<PassengerDetails> getPassdetails() {
+		return passdetails;
+	}
+
+	public void setPassdetails(Set<PassengerDetails> passdetails) {
+		this.passdetails = passdetails;
 	}
 
 }
