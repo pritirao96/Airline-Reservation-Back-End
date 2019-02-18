@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lti.airlines.dao.GenericDao;
-import com.lti.airlines.dto.TicketGeneration;
 import com.lti.airlines.entity.BookSeats;
 import com.lti.airlines.entity.Flight;
 import com.lti.airlines.entity.PassengerDetails;
+import com.lti.airlines.entity.TicketGeneration;
 import com.lti.airlines.entity.UserRegistration;
 import com.lti.airlines.objectEnum.BookStatus;
 

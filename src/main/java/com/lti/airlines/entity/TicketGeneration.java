@@ -1,4 +1,4 @@
-package com.lti.airlines.dto;
+package com.lti.airlines.entity;
 
 public class TicketGeneration {
 	private int flightId;
