@@ -1,8 +1,6 @@
 package com.lti.airlines.service;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.lti.airlines.dao.GenericDao;
 import com.lti.airlines.dao.SearchDao;
+import com.lti.airlines.dto.LoginDTO;
+import com.lti.airlines.dto.LoginStatusDTO;
 import com.lti.airlines.entity.AdminLogin;
 import com.lti.airlines.entity.Flight;
 import com.lti.airlines.entity.UserRegistration;
@@ -24,31 +24,42 @@ public class LoginService {
 	@Autowired
 	private SearchDao searchDao;
 
-	public String verifyUser(UserRegistration userRegistration) {
-		String email = userRegistration.getEmail();
-		String password = userRegistration.getPassword();
-		String flag = "false";
-		List<UserRegistration> userRegistrationList = genericDao.fetchUser(email,password);
-
-		if(userRegistrationList.size()!=0)
-					flag = "true";
-		return flag;
+	public LoginStatusDTO verifyUser(LoginDTO loginDto) {
+		LoginStatusDTO loginStatus= new LoginStatusDTO();
+		String email = loginDto.getEmail();
+		String password = loginDto.getPassword();
+		
+		try {
+		UserRegistration log=genericDao.fetchUser(email, password);
+		loginStatus.setStatus("Verified");
+		loginStatus.setUserId(log.getId());
+		loginStatus.setName(log.getfName());
+		}
+		catch(Exception e) {
+			loginStatus.setStatus("Not Verified");
+			e.printStackTrace();
+		}
+		return loginStatus;
+		
 	}
 	
-	public boolean verifyAdmin(AdminLogin adminLogin) {
-		String email = adminLogin.getEmailId();
-		String password = adminLogin.getPassword();
-		boolean flag=false;
-		List<AdminLogin> adminLoginList = genericDao.fetchAdmin(email,password);
-
-		for (AdminLogin adminLogin1 : adminLoginList) {
-			if (email.equals(adminLogin1.getEmailId())) {
-				if (password.equals(adminLogin1.getPassword())) {
-					flag = true;
-				}
-			}
+	public LoginStatusDTO verifyAdmin( LoginDTO loginDto) {
+		LoginStatusDTO loginStatus= new LoginStatusDTO();
+		String email = loginDto.getEmail();
+		String password = loginDto.getPassword();
+		
+		try {
+		AdminLogin log=genericDao.fetchAdmin(email, password);
+		loginStatus.setStatus("Verified");
+		loginStatus.setUserId(log.getId());
+		loginStatus.setName(log.getEmailId());
 		}
-		return flag;
+		catch(Exception e) {
+			loginStatus.setStatus("NotVerified");
+			e.printStackTrace();
+		}
+		return loginStatus;
+		
 	}
 	
 	@Transactional

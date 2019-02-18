@@ -1,5 +1,6 @@
 package com.lti.airlines.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class PassengerDetails {
 	
 	private int age;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id")
 	private UserRegistration userReg;
 

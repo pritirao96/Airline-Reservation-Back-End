@@ -22,7 +22,6 @@ public class UserRegistrationController {
 
 	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public Object addUser(@Valid @RequestBody UserRegistration userRegistration) {
-		//System.out.println(userRegistration.getfName());
 		Object obj= userRegistrationService.add(userRegistration);
 		return obj;
 	}
@@ -31,4 +30,5 @@ public class UserRegistrationController {
 	public UserRegistration fetchById(@PathVariable("id") int id) {
 		return userRegistrationService.fetchById(id);
 	}
+	
 }

@@ -19,7 +19,6 @@ public class FlightPriceController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@CrossOrigin
 	public String add(@RequestBody FlightPrice flightPrice) {
-		System.out.println("the servie class will be called now");
 		flightPriceService.add(flightPrice);
 		return "flight price entered";
 	}

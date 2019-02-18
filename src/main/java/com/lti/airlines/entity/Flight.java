@@ -1,16 +1,12 @@
 package com.lti.airlines.entity;
 
-import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 public class Flight {
@@ -23,9 +19,10 @@ public class Flight {
 	private String departureTime;
 	private String duration;
 	private String flightdate;
-
-	@OneToOne(fetch = FetchType.EAGER, mappedBy = "flight", cascade = CascadeType.ALL)
-	private FlightPrice flightPrice;
+	
+	@Column(nullable = false, columnDefinition = "int default 50")
+	private int noOfSeats;
+	private double pricePerSeat;
 	
 	@OneToMany(mappedBy="flight", cascade = CascadeType.ALL)
 	private Set<BookSeats> bookSeat;
@@ -78,20 +75,36 @@ public class Flight {
 		this.duration = duration;
 	}
 
-	public FlightPrice getFlightPrice() {
-		return flightPrice;
-	}
-
-	public void setFlightPrice(FlightPrice flightPrice) {
-		this.flightPrice = flightPrice;
-	}
-
-	public String getFlightDate() {
+	public String getFlightdate() {
 		return flightdate;
 	}
 
-	public void setFlightDate(String flightDate) {
-		this.flightdate = flightDate;
+	public void setFlightdate(String flightdate) {
+		this.flightdate = flightdate;
+	}
+
+	public int getNoOfSeats() {
+		return noOfSeats;
+	}
+
+	public void setNoOfSeats(int noOfSeats) {
+		this.noOfSeats = noOfSeats;
+	}
+
+	public double getPricePerSeat() {
+		return pricePerSeat;
+	}
+
+	public void setPricePerSeat(double pricePerSeat) {
+		this.pricePerSeat = pricePerSeat;
+	}
+
+	public Set<BookSeats> getBookSeat() {
+		return bookSeat;
+	}
+
+	public void setBookSeat(Set<BookSeats> bookSeat) {
+		this.bookSeat = bookSeat;
 	}
 
 }

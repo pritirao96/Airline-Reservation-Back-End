@@ -39,14 +39,13 @@ public class AirlinesReservationApplicationTests {
 	@Transactional
 	public void addUser() {
 		UserRegistration userRegistration = new UserRegistration();
-		userRegistration.setfName("amar");
-		userRegistration.setlName("panchal");
+		userRegistration.setfName("Amar");
+		userRegistration.setlName("Panchal");
 		userRegistration.setEmail("amar@gmail.com");
 		userRegistration.setDob("16/05/1996");
 		userRegistration.setPassword("amar@123");
 		userRegistration.setPhoneNo(996630213);
 		genericDao.store(userRegistration);
-		//assertNotNull(userRegistration);
 	}
 
 	@Test
@@ -62,23 +61,16 @@ public class AirlinesReservationApplicationTests {
 	public void add() throws ParseException {
 
 		Flight flight = new Flight();
-		flight.setFlightNumber(127);
+		flight.setFlightNumber(128);
 		flight.setSource("Mumbai");
 		flight.setDestination("Chennai");
 		flight.setArrivalTime("5:30:00");
 		flight.setDepartureTime("2:30:00");
 		flight.setDuration("2:30:00");
-		flight.setFlightDate("2019-02-19");
-
-		FlightPrice flightPrice = new FlightPrice();
-		flightPrice.setNoOfSeats(50);
-		flightPrice.setPricePerSeat(5560);
-
-		flightPrice.setFlight(flight);
-		flight.setFlightPrice(flightPrice);
+		flight.setFlightdate("2019-02-21");
+		flight.setPricePerSeat(5560);
 
 		genericDao.store(flight);
-		//assertNotNull(flight);
 	}
 
 	@Test
@@ -87,7 +79,6 @@ public class AirlinesReservationApplicationTests {
 		Flight flight = new Flight();
 		flight.setFlightNumber(120);
 		genericDao.delete(flight.getFlightNumber());
-		//genericDao.delete(Flight.class, 120);
 	}
 
 	@Test

@@ -1,8 +1,5 @@
 package com.lti.airlines.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.lti.airlines.dao.GenericDao;
 import com.lti.airlines.dto.FlightDTO;
 import com.lti.airlines.entity.Flight;
-import com.lti.airlines.entity.FlightPrice;
 
 @Service
 public class AdminService {
@@ -26,14 +22,9 @@ public class AdminService {
 		flight.setDestination(flightDto.getDestination());
 		flight.setArrivalTime(flightDto.getArrivalTime());
 		flight.setDepartureTime(flightDto.getDepartureTime());
-		flight.setFlightDate(flightDto.getFlightdate());
+		flight.setFlightdate(flightDto.getFlightdate());
 		flight.setDuration(flightDto.getDuration());
-		
-		FlightPrice flightPrice= new FlightPrice();
-		flightPrice.setPricePerSeat(flightDto.getPricePerSeat());
-		
-		flight.setFlightPrice(flightPrice);
-		flightPrice.setFlight(flight);
+		flight.setPricePerSeat(flightDto.getPricePerSeat());
 		
 		genericDao.store(flight);
 

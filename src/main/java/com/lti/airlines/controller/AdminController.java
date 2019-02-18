@@ -1,3 +1,4 @@
+
 package com.lti.airlines.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +15,18 @@ import com.lti.airlines.service.AdminService;
 @RestController
 @CrossOrigin
 public class AdminController {
-	
+
 	@Autowired
 	AdminService adminService;
-	
 
-	@RequestMapping(path="/addFlight",method=RequestMethod.POST)
+	@RequestMapping(path = "/addFlight", method = RequestMethod.POST)
 	public void addFlight(@RequestBody FlightDTO flightDto) {
-		System.out.println(flightDto);
-	adminService.addFlight(flightDto);
+
+		adminService.addFlight(flightDto);
 	}
-	
-	@RequestMapping(path="/flight/{flightNumber}",method=RequestMethod.GET)
-	public void deleteFlight(@PathVariable ("flightNumber") int flightNumber) {
+
+	@RequestMapping(path = "/flight/{flightNumber}", method = RequestMethod.GET)
+	public void deleteFlight(@PathVariable("flightNumber") int flightNumber) {
 		adminService.deleteFlight(flightNumber);
 	}
 }
