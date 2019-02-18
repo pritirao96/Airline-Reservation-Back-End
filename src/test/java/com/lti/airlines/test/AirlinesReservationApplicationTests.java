@@ -20,7 +20,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.lti.airlines.dao.GenericDao;
 import com.lti.airlines.dao.SearchDao;
 import com.lti.airlines.entity.Flight;
-import com.lti.airlines.entity.FlightPrice;
 import com.lti.airlines.entity.UserRegistration;
 
 @RunWith(SpringRunner.class)
@@ -61,14 +60,14 @@ public class AirlinesReservationApplicationTests {
 	public void add() throws ParseException {
 
 		Flight flight = new Flight();
-		flight.setFlightNumber(128);
-		flight.setSource("Mumbai");
-		flight.setDestination("Chennai");
-		flight.setArrivalTime("5:30:00");
-		flight.setDepartureTime("2:30:00");
+		flight.setFlightNumber(168);
+		flight.setSource("Pune");
+		flight.setDestination("Delhi");
+		flight.setArrivalTime("6:30:00");
+		flight.setDepartureTime("7:30:00");
 		flight.setDuration("2:30:00");
 		flight.setFlightdate("2019-02-21");
-		flight.setPricePerSeat(5560);
+		flight.setPricePerSeat(8360);
 
 		genericDao.store(flight);
 	}
@@ -77,7 +76,7 @@ public class AirlinesReservationApplicationTests {
 	@Transactional
 	public void deleteFlight() {
 		Flight flight = new Flight();
-		flight.setFlightNumber(120);
+		flight.setFlightNumber(190);
 		genericDao.delete(flight.getFlightNumber());
 	}
 
